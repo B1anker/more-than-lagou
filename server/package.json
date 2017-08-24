@@ -1,0 +1,29 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "lagou server",
+  "main": "app.js",
+  "scripts": {
+    "dev": "babel-node app.js",
+    "test": "mocha --compilers js:babel-core/register test/tool.spec.js"
+  },
+  "keywords": [
+    "lagou"
+  ],
+  "author": "B1anker",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "chai": "^4.1.1",
+    "koa": "^2.3.0",
+    "koa-router": "^7.2.1",
+    "request": "^2.81.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-stage-2": "^6.24.1",
+    "mocha": "^3.5.0"
+  }
+}
