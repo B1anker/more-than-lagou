@@ -1,6 +1,8 @@
 import KoaRouter from 'koa-router'
 import axios from 'axios'
 import api from '../crawler/api'
+import db from '../database'
+
 const job = KoaRouter()
 
 const http = axios.create({
@@ -20,16 +22,19 @@ const http = axios.create({
   }
 })
 
-job.post('/job', async (ctx, next) => {
+job.get('/job', async (ctx, next) => {
   const params = ctx.request.body
-  return http.post(api.job + '?city=%E5%B9%BF%E5%B7%9E&needAddtionalResult=false&isSchoolJob=0', {
-    'first': true,
-    'pn': 1,
-    'kd': 'web'
-  }).then((res) => {
-    ctx.body = res.data
-    next()
-  })
+  const col = await db
+  console.log(col)
+  // ctx.body = await db.find()
+  // return http.post(api.job + '?city=%E5%B9%BF%E5%B7%9E&needAddtionalResult=false&isSchoolJob=0', {
+  //   'first': true,
+  //   'pn': 1,
+  //   'kd': 'web'
+  // }).then((res) => {
+  //   ctx.body = res.data
+  //   next()
+  // })
 })
 
 export default job
