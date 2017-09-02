@@ -1,9 +1,5 @@
-import KoaRouter from 'koa-router'
 import axios from 'axios'
-import api from '../crawler/api'
-import db from '../database'
-import urlencode from 'urlencode'
-const job = KoaRouter()
+import api from './api'
 
 const http = axios.create({
   baseURL: api.baseURL,
@@ -23,12 +19,4 @@ const http = axios.create({
   }
 })
 
-job.get('/job', async (ctx, next) => {
-  const params = ctx.request.body
-  return http.get('https://www.lagou.com/jobs/positionAjax.json?city=' + urlencode('广州') + '&first=false&kd=' + urlencode('前端') + '&pn=' + 2).then((res) => {
-    ctx.body = res.data
-    next()
-  })
-})
-
-export default job
+export default http

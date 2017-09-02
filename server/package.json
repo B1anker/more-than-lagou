@@ -18,7 +18,9 @@
     "koa": "^2.3.0",
     "koa-router": "^7.2.1",
     "mongodb": "^2.2.31",
-    "request": "^2.81.0"
+    "request": "^2.81.0",
+    "superagent": "^3.6.0",
+    "urlencode": "^1.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
