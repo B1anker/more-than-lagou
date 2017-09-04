@@ -13,9 +13,9 @@ function insertIntoDataBase (jobs) {
 function getJobs(pageNum, city, keyword) {
   let url = ''
   if (pageNum === 1) {
-    url = 'https://www.lagou.com/jobs/positionAjax.json?city=' + urlencode('广州') + '&first=false&kd=' + urlencode('前端') + '&pn=' + 1
+    url = 'https://www.lagou.com/jobs/positionAjax.json?city=' + urlencode(city) + '&first=false&kd=' + urlencode('前端') + '&pn=' + 1
   } else {
-    url = 'https://www.lagou.com/jobs/positionAjax.json?city=' + urlencode('广州') + '&first=false&kd=' + urlencode('前端') + '&pn=' + pageNum
+    url = 'https://www.lagou.com/jobs/positionAjax.json?city=' + urlencode(city) + '&first=false&kd=' + urlencode('前端') + '&pn=' + pageNum
   }
   http.get(url).then((res) => {
     pageNum === 1 && col.insert(res.data.content.positionResult.result[0])
