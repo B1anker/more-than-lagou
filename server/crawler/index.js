@@ -1,2 +1,3 @@
-import http from './http'
+import runJobs from './getJobs'
 
+runJobs()

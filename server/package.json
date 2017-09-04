@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "babel-node app.js",
+    "crawl": "babel-node crawler/index.js",
     "test": "mocha --compilers js:babel-core/register test/tool.spec.js"
   },
   "keywords": [
