@@ -22,10 +22,10 @@ function getJobs(pageNum, city, keyword) {
   return new Promise((resolve, reject) => {
     http.get(url).then(async (res) => {
       if (res.data.success === false) {
-        console.log('操作频繁，一分钟后继续爬取')
+        console.log('操作频繁，两分钟后继续爬取')
         setTimeout(() => {
           getJobs(pageNum, city, keyword)
-        }, 60 * 1000)
+        }, 2 * 60 * 1000)
         return
       }
       const data = res.data
@@ -48,7 +48,7 @@ function getJobs(pageNum, city, keyword) {
 
 async function runJobs () {
   col = await db.connect('job')
-  console.time()
+  console.time('爬虫结束')
   await getJobs(1, '广州', '前端')
   console.timeEnd('爬虫结束')
 }
