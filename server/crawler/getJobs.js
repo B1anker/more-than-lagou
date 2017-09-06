@@ -5,8 +5,8 @@ import db from '../database'
 let col = null
 
 const insertIntoDataBase = (jobs) => {
-  jobs.map(async (job) => {
-    await col.insert(job)
+  jobs.forEach((job) => {
+    col.insert(job)
   })
 }
 
@@ -32,7 +32,7 @@ const getJobs = async (pageNum, city, keyword, resolve) => {
       resolve()
       return 0
     }
-    await col.insert(data.content.positionResult.result)
+    col.insert(data.content.positionResult.result)
     setTimeout(() => {
       getJobs(++pageNum, city, keyword, resolve)
     }, pageNum % 3 === 0 ? 5000 : 20000)
