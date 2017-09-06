@@ -1,8 +1,8 @@
 server/node_modules
 
-npm-debug.log
+server/npm-debug.log
 
-yarn-error.log
+server/yarn-error.log
 
 .DS_Store
 
