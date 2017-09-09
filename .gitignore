@@ -4,6 +4,12 @@ server/npm-debug.log
 
 server/yarn-error.log
 
+client/node_modules
+
+client/npm-debug.log
+
+client/yarn-error.log
+
 .DS_Store
 
 .vscode
