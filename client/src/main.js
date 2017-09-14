@@ -1,6 +1,6 @@
-import App from './app'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
 
-ReactDom.render(
-  <App/>,
-  document.querySelector('#app')
-)
+ReactDOM.render(<App />, document.getElementById('app'))
+

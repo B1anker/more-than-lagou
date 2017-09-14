@@ -15,7 +15,7 @@ export default {
       '@': resolve('src')
     }
   },
-  entry: './src/js/index.js',
+  entry: './src/main.js',
   module: {
     loaders: [
 			{
