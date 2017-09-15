@@ -46,7 +46,6 @@ export default class Operator {
     return new Promise((resolve, reject) => {
       this.collection.find(query).toArray((err, res) => {
         if (!err) {
-          console.log(res)
           resolve(res)
         }
         reject(err)
