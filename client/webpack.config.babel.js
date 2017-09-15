@@ -10,7 +10,7 @@ export default {
   context: path.join(__dirname),
   devtool: debug ? 'inline-sourcemap' : null,
   resolve: {
-		extensions: ['.ts', 'tsx', '.js', 'jsx'],
+		extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
     alias: {
       '@': resolve('src')
 		}
@@ -21,9 +21,8 @@ export default {
   module: {
     loaders: [
 			{
-				test: /\.(ts|tsx|js|jsx)$/,
-				loaders: ['babel-loader'],
-				include: path.resolve('src')
+				test: /\.tsx?$/,
+				loader: 'ts-loader'
 			},
 			{
 				test: /\.css$/,
@@ -43,5 +42,5 @@ export default {
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({mangle: false, sourcemap: false})
-  ]
+	]
 }
