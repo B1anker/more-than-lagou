@@ -1,50 +1,33 @@
 import webpack from 'webpack'
 import path from 'path'
-
 const debug = process.env.NODE_ENV !== 'production'
 
-const resolve = (arg) => {
-  return path.join(__dirname, ...arg)
+const resolve = (dir) => {
+  return path.join(__dirname, '..', dir)
 }
 
 export default {
   context: path.join(__dirname),
   devtool: debug ? 'inline-sourcemap' : null,
   resolve: {
+		extensions: ['.ts', 'tsx', '.js', 'jsx'],
     alias: {
       '@': resolve('src')
-    }
+		}
   },
-  entry: './src/main.js',
+  entry: {
+		app: './src/entry.tsx'
+	},
   module: {
     loaders: [
 			{
-				test: /\.js?$/,
-				exclude: /(node_modules)/,
-				loader: 'babel-loader',
-				query: {
-					presets: [
-						'react', 'es2015'
-					],
-					plugins: [
-						'react-html-attrs',
-						[
-							"import", {
-								"libraryName": "antd",
-								"libraryDirectory": "lib", // default: lib
-								"style": "css"
-							}
-						]
-					], //添加组件的插件配置
-				}
+				test: /\.(ts|tsx|js|jsx)$/,
+				loaders: ['babel-loader'],
+				include: path.resolve('src')
 			},
-			//下面是使用 ant-design 的配置文件
 			{
 				test: /\.css$/,
 				loader: 'style-loader!css-loader'
-			}, {
-				test: /\.scss/,
-				loader: 'style-loader!css-loader!sass-loader'
 			}, {
 				test: /\.less/,
 				loader: 'style-loader!css-loader!less-loader'
