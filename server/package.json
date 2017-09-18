@@ -12,7 +12,7 @@
     "lagou"
   ],
   "author": "B1anker",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "dependencies": {
     "axios": "^0.16.2",
     "chai": "^4.1.1",

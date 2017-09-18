@@ -3,7 +3,7 @@ import path from 'path'
 const debug = process.env.NODE_ENV !== 'production'
 
 const resolve = (dir) => {
-  return path.join(__dirname, '..', dir)
+  return path.join(__dirname, dir)
 }
 
 export default {
@@ -21,8 +21,15 @@ export default {
   module: {
     loaders: [
 			{
+        test: /\.tsx?$/,
+        loader: 'tslint-loader',
+        enforce: 'pre',
+        exclude: /(node_modules)/
+      },
+			{
 				test: /\.tsx?$/,
-				loader: 'ts-loader'
+				loader: 'awesome-typescript-loader',
+				exclude: /(node_modules)/
 			},
 			{
 				test: /\.css$/,
