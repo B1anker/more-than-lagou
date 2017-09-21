@@ -7,43 +7,99 @@ class Index extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      chart: null
+      chart: null,
+      salary: {}
     }
   }
 
   public render () {
     return (
-      <div id="chart"/>
+      <div id="chart" />
     )
   }
 
-  public componentDidMount () {
-    this.instanceEchart()
-    this.fetchJob()
+  public async componentDidMount () {
+    const data = await this.fetchJob()
+    this.handleJob(data)
   }
 
-  private instanceEchart () {
+  private instanceEchart (result) {
     const chart = echarts.init(document.querySelector('#chart'))
     this.setState({
       chart
     })
     const option = {
+      backgroundColor: '#2c343c',
+
       title: {
-        text: 'ECharts 入门示例'
+        text: '前端薪资分布',
+        left: 'center',
+        top: 20,
+        textStyle: {
+          color: '#ccc',
+          fontSize: 30
+        }
       },
-      tooltip: {},
-      legend: {
-        data: ['销量']
+
+      tooltip: {
+        trigger: 'item',
+        formatter: '{a} <br/>{b} : {c} ({d}%)'
       },
-      xAxis: {
-        data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+
+      visualMap: {
+        show: false,
+        min: 0,
+        max: 70,
+        inRange: {
+          colorLightness: [0, 1]
+        }
       },
-      yAxis: {},
-      series: [{
-        name: '销量',
-        type: 'bar',
-        data: [5, 20, 36, 10, 10, 20]
-      }]
+      series: [
+        {
+          name: '访问来源',
+          type: 'pie',
+          radius: '55%',
+          center: ['50%', '50%'],
+          data: Object.keys(result).map((key) => {
+            return {
+              value: result[key],
+              name: key === 'more' ? '>40K' : `<=${key}K`
+            }
+          }).sort((a, b) => a.value - b.value),
+          roseType: 'radius',
+          label: {
+            normal: {
+              textStyle: {
+                color: 'rgba(255, 255, 255, 0.3)'
+              },
+              fontSize: '20'
+            }
+          },
+          labelLine: {
+            normal: {
+              lineStyle: {
+                color: 'rgba(255, 255, 255, 0.3)'
+              },
+              smooth: 0.2,
+              length: 10,
+              length2: 20
+            }
+          },
+          itemStyle: {
+            normal: {
+              color: '#c23531',
+              shadowBlur: 200,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          },
+
+          animationType: 'scale',
+          animationEasing: 'elasticOut',
+          animationDelay (idx) {
+            return Math.random() * 200
+          }
+        }
+      ]
     }
 
     // 使用刚指定的配置项和数据显示图表。
@@ -57,8 +113,37 @@ class Index extends Component {
    */
   private fetchJob () {
     return axios.get('/lagou/job').then((res) => {
-      console.log(res)
+      return res.data
     })
+  }
+
+  private handleJob (data) {
+    const salary = {}
+    data.forEach((item, index) => {
+      if (salary[item.salary]) {
+        salary[item.salary]++
+      } else {
+        salary[item.salary] = 1
+      }
+    })
+    const result = {
+      more: 0
+    }
+    Object.keys(salary).forEach((key) => {
+      const range = Number(key.match(/-(\d*)/)[1])
+      if (range <= 10) {
+        result['10'] = !result['10'] ? 1 : result['10'] + 1
+      } else if (range <= 20) {
+        result['20'] = !result['20'] ? 1 : result['20'] + 1
+      } else if (range <= 30) {
+        result['30'] = !result['30'] ? 1 : result['30'] + 1
+      } else if (range <= 40) {
+        result['40'] = !result['40'] ? 1 : result['40'] + 1
+      } else {
+        result.more++
+      }
+    })
+    this.instanceEchart(result)
   }
 }
 

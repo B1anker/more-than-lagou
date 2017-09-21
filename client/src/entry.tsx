@@ -5,4 +5,4 @@ import { start } from './lib/api'
 
 start()
 
-ReactDOM.render(<App />, document.getElementById('app'))
+ReactDOM.render(<App />, document.querySelector('#app'))
