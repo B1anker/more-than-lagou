@@ -3,27 +3,33 @@ import path from 'path'
 const debug = process.env.NODE_ENV !== 'production'
 
 const resolve = (dir) => {
-  return path.join(__dirname, '..', dir)
+  return path.join(__dirname, dir)
 }
 
 export default {
   context: path.join(__dirname),
   devtool: debug ? 'inline-sourcemap' : null,
   resolve: {
-		extensions: ['.ts', 'tsx', '.js', 'jsx'],
+		extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
     alias: {
       '@': resolve('src')
 		}
   },
-  entry: {
-		app: './src/entry.tsx'
-	},
+  entry: [
+		'../src/entry.tsx'
+	],
   module: {
     loaders: [
 			{
-				test: /\.(ts|tsx|js|jsx)$/,
-				loaders: ['babel-loader'],
-				include: path.resolve('src')
+        test: /\.tsx?$/,
+        loader: 'tslint-loader',
+        enforce: 'pre',
+        exclude: /(node_modules)/
+      },
+			{
+				test: /\.tsx?$/,
+				loader: 'awesome-typescript-loader',
+				exclude: /(node_modules)/
 			},
 			{
 				test: /\.css$/,
@@ -43,5 +49,5 @@ export default {
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({mangle: false, sourcemap: false})
-  ]
+	]
 }

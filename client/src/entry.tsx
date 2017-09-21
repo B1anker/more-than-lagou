@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './app.tsx'
+import App from './app'
+import { start } from './lib/api'
 
-ReactDOM.render( <App />, document.getElementById('app'))
+start()
 
+ReactDOM.render(<App />, document.querySelector('#app'))

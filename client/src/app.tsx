@@ -1,17 +1,15 @@
-import React, { Component } from 'react'
-import { DatePicker } from 'antd'
-import 'antd/dist/antd.less'
+import React from 'react'
+import './assets/less/common.less'
+import './assets/less/reset.less'
+import Index from './pages/index/index'
 
-export default class App extends Component {
-  render () {
+class App extends React.Component {
+
+  public render () {
     return (
-      <div>
-        <DatePicker onChange={this.change.bind(this)} />
-      </div>
+      <Index />
     )
   }
-
-  change (date: any, dateString: any) {
-    console.log(date, dateString)
-  }
 }
+
+export default App
