@@ -14,11 +14,11 @@ export const start = () => {
 
   Object.defineProperties(React, {
     $http: {
-      get() {
+      get () {
         return instance
       },
 
-      set(newVal) {
+      set (newVal) {
         return newVal
       }
     }

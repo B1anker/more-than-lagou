@@ -3,6 +3,8 @@
   "extends": ["tslint:latest", "tslint-react"],
   "jsRules": {},
   "rules": {
+    "space-before-function-paren": true,
+    "no-console": false,
     // use single quotes, but enforce double quotes in JSX
     "quotemark": [true, "single", "jsx-double"],
     // I prefer no semi colons :)

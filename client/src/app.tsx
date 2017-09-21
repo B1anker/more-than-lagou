@@ -1,9 +1,9 @@
 import React from 'react'
-import Index from './pages/index'
+import Index from './pages/index/index'
 
 class App extends React.Component {
 
-  public render() {
+  public render () {
     return (
       <div>
         <Index />
