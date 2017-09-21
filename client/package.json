@@ -4,7 +4,7 @@
   "description": "more-than-lagou",
   "main": "root.js",
   "scripts": {
-    "dev": "webpack-dev-server --content-base --inline --hot",
+    "dev": "babel-node build/server",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "tslint --project tsconfig.json"
   },

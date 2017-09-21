@@ -15,9 +15,9 @@ export default {
       '@': resolve('src')
 		}
   },
-  entry: {
-		app: './src/entry.tsx'
-	},
+  entry: [
+		'../src/entry.tsx'
+	],
   module: {
     loaders: [
 			{

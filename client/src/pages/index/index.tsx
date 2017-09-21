@@ -1,3 +1,4 @@
+import axios from 'axios'
 import echarts from 'echarts'
 import React, { Component } from 'react'
 import './index.less'
@@ -18,6 +19,7 @@ class Index extends Component {
 
   public componentDidMount () {
     this.instanceEchart()
+    this.fetchJob()
   }
 
   private instanceEchart () {
@@ -46,6 +48,17 @@ class Index extends Component {
 
     // 使用刚指定的配置项和数据显示图表。
     chart.setOption(option)
+  }
+
+  /**
+   * 传入用户名，获取用户的github上仓库信息
+   * @param  {[type]} username [description]
+   * @return {[type]}          [description]
+   */
+  private fetchJob () {
+    return axios.get('/lagou/job').then((res) => {
+      console.log(res)
+    })
   }
 }
 
