@@ -1,5 +1,6 @@
 import webpack from 'webpack'
 import path from 'path'
+const tsImportPluginFactory = require('ts-import-plugin')
 const debug = process.env.NODE_ENV !== 'production'
 
 const resolve = (dir) => {
@@ -28,8 +29,21 @@ export default {
       },
 			{
 				test: /\.tsx?$/,
-				loader: 'awesome-typescript-loader',
-				exclude: /(node_modules)/
+				loader: 'ts-loader',
+				exclude: /(node_modules)/,
+        options: {
+          transpileOnly: true,
+          getCustomTransformers: () => ({
+            before: [ tsImportPluginFactory({
+							libraryName: 'antd',
+							libraryDirectory: 'lib',
+							style: true
+						}) ]
+          }),
+          compilerOptions: {
+            module: 'es2015'
+          }
+        }
 			},
 			{
 				test: /\.css$/,

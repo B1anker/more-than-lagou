@@ -144,6 +144,9 @@ class Index extends Component {
       }
     })
     this.instanceEchart(result)
+    enum Color { Red = 1, Green, Blue}
+    const colorName: string = Color[2]
+    console.log(colorName)
   }
 }
 

@@ -1,3 +1,4 @@
+import { Button } from 'antd'
 import React from 'react'
 import './assets/less/common.less'
 import './assets/less/reset.less'
@@ -7,7 +8,10 @@ class App extends React.Component {
 
   public render () {
     return (
-      <Index />
+      <div>
+        <Button type="primary">primary</Button>
+        <Index />
+      </div>
     )
   }
 }
